@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { mutate } from 'swr';
+import PhotosApi from '~/lib/api/photos';
 
 const Container = styled.div`
   flex: auto;
@@ -41,6 +43,16 @@ function Photo(props: PhotoProps) {
     data: { id, album, name, raw },
   } = props;
 
+  const deletePhoto = () => {
+    mutate('delete-hoto', async () => {
+      try {
+        await PhotosApi.delete(album, name);
+      } catch (error) {
+        console.log(error?.response?.data?.message);
+      }
+    });
+  };
+
   return (
     <Container key={id}>
       <Image
@@ -48,6 +60,7 @@ function Photo(props: PhotoProps) {
       />
       <Label>{album}</Label>
       <Label>{name}</Label>
+      <button onClick={deletePhoto}>Delete</button>
     </Container>
   );
 }
