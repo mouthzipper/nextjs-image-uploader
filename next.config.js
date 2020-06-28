@@ -9,4 +9,7 @@ module.exports = withBundleAnalyzer({
     config.resolve.alias['~'] = path.resolve('./src');
     return config;
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 });

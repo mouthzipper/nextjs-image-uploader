@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import { SERVER_BASE_URL } from '~/lib/utils/constants';
+import { SERVER_BASE_URL, LIMIT_PER_PAGE } from '~/lib/utils/constants';
 
 const PhotosAPI = {
-  all: (skip = 0, limit = 10) =>
+  all: (skip = 0, limit = LIMIT_PER_PAGE) =>
     axios.post(`${SERVER_BASE_URL}/photos/list`, { skip, limit }),
   upload: (formData) => {
     try {
@@ -19,7 +19,9 @@ const PhotosAPI = {
   },
   delete: (album: string, fileName: string) => {
     try {
-      return axios.delete(`${SERVER_BASE_URL}/photos/${album}/${fileName}`);
+      return axios.delete(
+        `${SERVER_BASE_URL}/photos/${album.toLocaleLowerCase()}/${fileName}`
+      );
     } catch (error) {
       return error.response;
     }
