@@ -60,6 +60,7 @@ function Uploader() {
       }
     });
   };
+
   return (
     <Container>
       <UploadBox {...getRootProps()}>
