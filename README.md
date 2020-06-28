@@ -14,6 +14,6 @@
 
 ## TODO
 1. Proper Testing
-2. Proper Typechecking
-3: Loader if api is slow
+2. Proper Typechecking<br />
+3: Loader if api is slow<br />
 4: Error or success toaster
