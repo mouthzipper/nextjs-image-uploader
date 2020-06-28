@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { mutate } from 'swr';
 import PhotosApi from '~/lib/api/photos';
+import PageContext from '~/lib/context/PageContext';
+import Button from '~/components/Button';
 
 const Container = styled.div`
   flex: auto;
@@ -26,7 +28,7 @@ const Label = styled.label`
   padding: 5px 0;
 `;
 
-interface PhotoDTO {
+export interface PhotoDTO {
   id: string;
   album: string;
   name: string;
@@ -35,18 +37,20 @@ interface PhotoDTO {
 }
 
 interface PhotoProps {
-  data: PhotoDTO;
+  item: PhotoDTO;
 }
 
 function Photo(props: PhotoProps) {
   const {
-    data: { id, album, name, raw },
+    item: { id, album, name, raw },
   } = props;
+  const { revalidate } = useContext(PageContext);
 
   const deletePhoto = () => {
     mutate('delete-hoto', async () => {
       try {
         await PhotosApi.delete(album, name);
+        revalidate();
       } catch (error) {
         console.log(error?.response?.data?.message);
       }
@@ -60,7 +64,9 @@ function Photo(props: PhotoProps) {
       />
       <Label>{album}</Label>
       <Label>{name}</Label>
-      <button onClick={deletePhoto}>Delete</button>
+      <Button onClick={deletePhoto} padding="0.25rem">
+        Delete
+      </Button>
     </Container>
   );
 }

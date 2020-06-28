@@ -1,13 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-const Title = styled.h1`
-  font-size: 40px;
+const Image = styled.img`
+  width: 300px;
+  margin-top: 30px;
 `;
+
 export default function Header() {
   return (
     <header>
-      <Title>Image Uploader</Title>
+      <Image src="/image-uploader.svg" alt="Image Uploader" />
     </header>
   );
 }

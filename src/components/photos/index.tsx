@@ -1,27 +1,31 @@
 import React from 'react';
-import useSWR from 'swr';
-import PhotosApi from '~/lib/api/photos';
 import styled from 'styled-components';
 import Photo from '~/components/photo';
-
+import PhotoDTO from '~/components/photo';
 const Container = styled.div`
   padding: 0.5vw;
   font-size: 0;
   flex-flow: row wrap;
   display: flex;
 `;
-const fetchPhotos = async () => {
-  const { data } = await PhotosApi.all();
-  return data;
-};
+interface PhotosDTO {
+  count: number;
+  documents: PhotoDTO[];
+  limit: number;
+  message: string;
+  skip: 0;
+}
+interface PhotoProps {
+  data: PhotosDTO;
+}
 
-function Photos() {
-  const { data: photos } = useSWR('all-photos', fetchPhotos);
-  if (photos?.documents.length > 0) {
+function Photos(props: PhotoProps) {
+  const { data } = props;
+  if (data?.documents) {
     return (
       <Container>
-        {photos.documents.map((photo) => (
-          <Photo key={photo.id} data={photo} />
+        {data.documents.map((photo) => (
+          <Photo key={photo.id} item={photo} />
         ))}
       </Container>
     );
