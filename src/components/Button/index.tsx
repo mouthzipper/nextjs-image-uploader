@@ -9,7 +9,7 @@ const Button = styled.button`
   box-shadow: 15px 28px 25px -18px rgba(0, 0, 0, 0.2);
   transition: all 235ms ease-in-out 0s;
   align-self: flex-start;
-  background: 0 0;
+  background: ${(props) => (props.isActive ? '#c1d3df' : '0 0')};
   border: 2px solid #41403e;
   color: #41403e;
   cursor: pointer;

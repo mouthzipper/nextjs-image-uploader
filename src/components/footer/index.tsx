@@ -15,6 +15,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
 
   footer img {
@@ -25,6 +26,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px;
   }
 
   a {
@@ -42,6 +44,9 @@ export default function Footer() {
           rel="noopener noreferrer"
         >
           Powered by <img src="/zeit.svg" alt="ZEIT Logo" />
+        </a>
+        <a href="https://undraw.co/" target="_blank" rel="noopener noreferrer">
+          Images from Undraw
         </a>
       </footer>
     </Container>

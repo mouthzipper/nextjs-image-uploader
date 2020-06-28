@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import PhotosApi from '~/lib/api/photos';
 import Header from '~/components/header';
 import Footer from '~/components/footer';
@@ -14,10 +14,17 @@ const fetchPhotos = async () => {
 
 export default function Home() {
   const { data: photos, revalidate } = useSWR('all-photos', fetchPhotos);
+
+  const revalidateWithData = (newData) => {
+    // mutate current photo with new page data
+    mutate('all-photos', newData, false);
+  };
+
   return (
     <PageContext.Provider
       value={{
         revalidate,
+        revalidateWithData,
       }}
     >
       <div className="container">
@@ -27,9 +34,7 @@ export default function Home() {
         <Header />
         <main>
           <Uploader />
-          <section>
-            <Photos data={photos} />
-          </section>
+          <Photos data={photos} />
         </main>
 
         <Footer />

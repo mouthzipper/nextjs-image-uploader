@@ -1,10 +1,9 @@
 import axios from 'axios';
 
 import { SERVER_BASE_URL } from '~/lib/utils/constants';
-import { getQuery } from '~/lib/utils/getQuery';
 
 const PhotosAPI = {
-  all: (skip = 0, limit = 100) =>
+  all: (skip = 0, limit = 10) =>
     axios.post(`${SERVER_BASE_URL}/photos/list`, { skip, limit }),
   upload: (formData) => {
     try {
