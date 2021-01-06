@@ -23,7 +23,7 @@
   },
   "pre-commit": "lint:staged",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "eslint-plugin-cypress": "^2.10.3",
     "next": "9.4.4",
     "react": "16.13.1",
